@@ -1,0 +1,46 @@
+#!/bin/bash
+ 
+node-inspector --web-port 8080 &
+ 
+sleep 1
+ 
+URL="http://127.0.0.1:8080/debug?port=5858"
+ 
+echo "
+tell application \"Google Chrome\"
+	set aWin to make new window with properties {mode:\"incognito\"}
+	tell aWin
+    activate
+		tell active tab
+			set URL to \"${URL}\"
+		end tell
+	end tell
+end tell" | osascript
+ 
+export WINDOW_ID=`osascript -e 'tell application "Google Chrome" to get id of the front window'`
+ 
+echo "started inspector and opened window ${SAFARI_WINDOW_ID}"
+ 
+function stopInspector {
+  echo "closing inspector window..."
+  osascript -e "tell application \"Google Chrome\" to close (every window whose id is $WINDOW_ID)"
+  INSPECTOR_PID=`pgrep -fl 'node-inspector --web-port' | awk '{ print $1 }'`
+  echo "stopping ${INSPECTOR_PID}..."
+  if [ -n "$INSPECTOR_PID" ]; then
+    kill $INSPECTOR_PID
+    sleep 1
+  fi
+}
+ 
+cmd=$@
+ 
+if [[ $cmd != \-brk* ]]
+  then
+  cmd=" ${@}"
+fi
+ 
+echo "running: coffee --nodejs --debug$cmd"
+ 
+coffee --nodejs --debug$cmd
+ 
+trap stopInspector EXIT
