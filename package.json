@@ -1,6 +1,6 @@
 {
   "name": "coffee-debug",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple cli script to debug coffee script on nodejs using node-inspector and chrome",
   "author": "Andy Damevin <ia3andy@gmail.com>",
   "license": "BSD-3-Clause",
