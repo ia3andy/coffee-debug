@@ -1,8 +1,23 @@
 {
   "name": "coffee-debug",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple cli script to debug coffee script on nodejs using node-inspector",
   "author": "Andy Damevin <ia3andy@gmail.com>",
+  "homepage": "https://github.com/ia3andy/coffee-debug",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ia3andy/coffee-debug.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ia3andy/coffee-debug/issues"
+  },
   "license": "BSD-3-Clause",
-  "bin" : "bin/coffee-debug"
+  "bin" : "bin/coffee-debug",
+  "keywords": [
+    "coffee",
+    "coffee-script",
+    "debug",
+    "coffescript",
+    "node-inspector"
+  ]
 }
